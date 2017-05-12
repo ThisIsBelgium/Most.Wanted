@@ -105,25 +105,36 @@ function chars(input){
 
 function searchTrait(people){
   var traits = promptFor("What trait are you looking for?", chars);
-  var traitArray= []
+  var traitArray= [];
     switch(traits){
       case "age":
 
       case "height":
-        searchedValue = prompt("Height in inches")
+        searchedValue = prompt("Enther the eight (in inches) you would like to search for");
         for (var i = 0; i<= 21; i++) {
           if (people[i].height == searchedValue) {
-              traitArray.push(people[i].firstName + " " + people[i].lastName)
+              traitArray.push(people[i].firstName + " " + people[i].lastName);
           }
         } return(traitArray);
-      }
-    }
 
-      //case "weight":
+      case "weight":
+        searchedValue = prompt("Enter the weight (in pounds) you would like to seach for.");
+        for (var i = 0; i<=21; i++) {
+          if (people[i].weight == searchedValue) {
+              traitArray.push(people[i].firstName + " " + people[i].lastName);
+          }
+        } return(traitArray);
 
-      //case "occupation":
+      case "eye color":
+        searchedValue = prompt("Enter the eye color you would like to search for.");
+        for (var i = 0; i<=21; i++) {
+          if (people[i].eyeColor == searchedValue) {
+              traitArray.push(people[i].firstName + " " + people[i].lastName);
+          }
+        } return traitArray
 
-      //case "eyeColor":
+
+      
 function spouseCheck(person,people){
      for (var i = 0; i <= 21; i++) {
         if (person.currentSpouse === people[i].id){
@@ -172,3 +183,4 @@ function siblingCheck(person,people){
 
 
    
+
