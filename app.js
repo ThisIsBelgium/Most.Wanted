@@ -8,11 +8,13 @@ function app(people){
   switch(searchType){
     case 'yes':
       var person=searchByName(people)
-      var selectedPersonInformation= mainMenu(person,people)
+      mainMenu(person,people)
 
     break;
     case 'no':
-    // TODO: search by traits
+      var ids=searchTrait(people)
+      alert(ids)
+   
     break;
     default:
     app(people); // restart app
@@ -34,10 +36,14 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      alert(person.height + "\n" + person.weight + "\n" + person.occupation + "\n" + person.eyeColor)
     break;
     case "family":
-    // TODO: get person's family
+     for (var i = 0; i <= 21; i++) {
+        if (person.currentSpouse === people[i].id){
+          var spouseName= (people[i].firstName + " " + people[i].lastName)
+        }
+    }
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -97,3 +103,26 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function searchTrait(people){
+  var traits = promptFor("What trait are you looking for?", chars);
+  var traitArray= []
+    switch(traits){
+      case "age":
+
+      case "height":
+        searchedValue = prompt("Height in inches")
+        for (var i = 0; i<= 21; i++) {
+          if (people[i].height == searchedValue) {
+              traitArray.push(people[i].firstName + " " + people[i].lastName)
+          }
+        } return(traitArray);
+      }
+    }
+
+      //case "weight":
+
+      //case "occupation":
+
+      //case "eyeColor":
+    
