@@ -36,14 +36,13 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      alert(person.height + "\n" + person.weight + "\n" + person.occupation + "\n" + person.eyeColor)
+      alert("Height in inches:\n" + person.height + "\n" + "Weight in pounds:\n" + person.weight + "\n" + "Occupation:\n" + person.occupation + "\n" + "Eye color:\n" + person.eyeColor)
     break;
     case "family":
-     for (var i = 0; i <= 21; i++) {
-        if (person.currentSpouse === people[i].id){
-          var spouseName= (people[i].firstName + " " + people[i].lastName)
-        }
-    }
+      spouseCheck(person,people)
+      parentCheck(person,people)
+      childCheck(person,people)
+      siblingCheck(person,people)
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -125,4 +124,51 @@ function searchTrait(people){
       //case "occupation":
 
       //case "eyeColor":
-    
+function spouseCheck(person,people){
+     for (var i = 0; i <= 21; i++) {
+        if (person.currentSpouse === people[i].id){
+          var spouseName= (people[i].firstName + " " + people[i].lastName)
+          alert(spouseName)
+        }
+      }
+    }
+
+function parentCheck(person,people){
+  var parentNames=[]
+  var parentId=[]
+  for (var i = 0; i <= 1; i++) {
+    parentId.push(person.parents[i])
+  }if (parentId[0]>0) {
+    for (var i = 0; i <= 21; i++) {
+      if (people[i].id === parentId[0] || people[i].id === parentId[1]) {
+        parentNames.push(people[i].firstName + " " + people[i].lastName)
+      }
+    }
+  }alert(parentNames)
+}
+
+function childCheck(person,people){
+  var childNames=[]
+  for (var i = 0; i <= 21; i++) {
+    if (person.id == people[i].parents[0] || person.id == people[i].parents[1]){
+      childNames.push(people[i].firstName + " " + people[i].lastName)
+    }
+  }alert(childNames)
+} 
+
+function siblingCheck(person,people){
+  var siblingNames=[]
+    for (var i = 0 ; i <= 21; i++) {
+      if (person.parents[0] == people[i].parents[0]){
+        siblingNames.push(people[i].firstName + " " + people[i].lastName)
+      }
+    }alert(siblingNames)
+  }
+
+
+
+
+  
+
+
+   
