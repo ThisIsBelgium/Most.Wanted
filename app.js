@@ -60,7 +60,7 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-    for (var i=0; i<=21; i++){
+    for (var i=0; i<=people.length; i++){
         if (people[i].firstName === firstName && people[i].lastName === lastName){
           return(people[i])
         }
@@ -103,40 +103,22 @@ function chars(input){
   return true; // default validation only
 }
 
-function searchTrait(people){
-  var traits = promptFor("What trait are you looking for?", chars);
-  var traitArray= [];
-    switch(traits){
-      case "age":
+function searchTrait (people) {
+    var traitType=promptFor ("What are the traits you would like to search for? Age, Height, Weight, Eye Color or Occupation?").toLowerCase;
+      people.filter(function (traitType)) {
+          if (traitType==) {
 
-      case "height":
-        searchedValue = prompt("Enther the eight (in inches) you would like to search for");
-        for (var i = 0; i<= 21; i++) {
-          if (people[i].height == searchedValue) {
-              traitArray.push(people[i].firstName + " " + people[i].lastName);
-          }
-        } return(traitArray);
 
-      case "weight":
-        searchedValue = prompt("Enter the weight (in pounds) you would like to seach for.");
-        for (var i = 0; i<=21; i++) {
-          if (people[i].weight == searchedValue) {
-              traitArray.push(people[i].firstName + " " + people[i].lastName);
           }
-        } return(traitArray);
 
-      case "eye color":
-        searchedValue = prompt("Enter the eye color you would like to search for.");
-        for (var i = 0; i<=21; i++) {
-          if (people[i].eyeColor == searchedValue) {
-              traitArray.push(people[i].firstName + " " + people[i].lastName);
-          }
-        } return traitArray
+
+      }
+}
 
 
       
 function spouseCheck(person,people){
-     for (var i = 0; i <= 21; i++) {
+     for (var i = 0; i <= people.length; i++) {
         if (person.currentSpouse === people[i].id){
           var spouseName= (people[i].firstName + " " + people[i].lastName)
           alert(spouseName)
@@ -147,10 +129,10 @@ function spouseCheck(person,people){
 function parentCheck(person,people){
   var parentNames=[]
   var parentId=[]
-  for (var i = 0; i <= 1; i++) {
+  for (var i = 0; i <= people.length; i++) {
     parentId.push(person.parents[i])
   }if (parentId[0]>0) {
-    for (var i = 0; i <= 21; i++) {
+    for (var i = 0; i <= people.length; i++) {
       if (people[i].id === parentId[0] || people[i].id === parentId[1]) {
         parentNames.push(people[i].firstName + " " + people[i].lastName)
       }
@@ -160,7 +142,7 @@ function parentCheck(person,people){
 
 function childCheck(person,people){
   var childNames=[]
-  for (var i = 0; i <= 21; i++) {
+  for (var i = 0; i <= people.length; i++) {
     if (person.id == people[i].parents[0] || person.id == people[i].parents[1]){
       childNames.push(people[i].firstName + " " + people[i].lastName)
     }
@@ -169,12 +151,14 @@ function childCheck(person,people){
 
 function siblingCheck(person,people){
   var siblingNames=[]
-    for (var i = 0 ; i <= 21; i++) {
+    for (var i = 0 ; i <= people.length; i++) {
       if (person.parents[0] == people[i].parents[0]){
         siblingNames.push(people[i].firstName + " " + people[i].lastName)
       }
     }alert(siblingNames)
   }
+
+
 
 
 
