@@ -125,14 +125,24 @@ function searchTrait(people){
               traitArray.push(people[i].firstName + " " + people[i].lastName);
           }
         } return(traitArray);
+
+      case "eye color":
+        searchedValue = prompt("Enter the eye color you would like to search for.");
+        for (var i = 0; i<=21; i++) {
+          if (people[i].eyeColor == searchedValue) {
+              traitArray.push(people[i].firstName + " " + people[i].lastName);
+          }
+        } return traitArray;
+    
       }
+
 
 
     }
 
-      //case "weight":
+      
 
       //case "occupation":
 
-      //case "eyeColor":
+  
     
