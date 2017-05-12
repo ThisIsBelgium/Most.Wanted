@@ -153,13 +153,10 @@ function childCheck(person,people){
 
 function siblingCheck(person,people){
   var siblingNames=[]
-<<<<<<< HEAD
     for (var i = 0 ; i <= people.length; i++) {
       if (person.parents[0] == people[i].parents[0]){
-=======
     for (var i = 0 ; i <= 21; i++) {
       if (person.parents[0]>0 && person.parents[0] == people[i].parents[0]){
->>>>>>> 4605a48c8c5047906c780a75b863281d4b2cb974
         siblingNames.push(people[i].firstName + " " + people[i].lastName)
       }
     } return siblingNames
