@@ -39,10 +39,14 @@ function mainMenu(person, people){
       alert("Height in inches:\n" + person.height + "\n" + "Weight in pounds:\n" + person.weight + "\n" + "Occupation:\n" + person.occupation + "\n" + "Eye color:\n" + person.eyeColor)
     break;
     case "family":
-      spouseCheck(person,people)
-      parentCheck(person,people)
-      childCheck(person,people)
-      siblingCheck(person,people)
+      var spouseName = spouseCheck(person,people)
+      var parentString = parentCheck(person,people)
+      var childString = childCheck(person,people)
+      var siblingNamesPreFilter = siblingCheck(person,people)
+      var siblingNames = siblingNamesPreFilter.filter(function(a){
+        return a!==(person.firstName + " " + person.lastName)
+      })
+      alert("Spouse name:" + "\n" + spouseName + "\n" + "Parents:" + "\n" + parentString + "\n" + "Children:" + "\n" + childString + "\n" + "Siblings:" + "\n" + siblingNames)
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -132,6 +136,8 @@ function searchTrait(people){
               traitArray.push(people[i].firstName + " " + people[i].lastName);
           }
         } return traitArray
+      }
+    }
 
 
       
@@ -139,10 +145,10 @@ function spouseCheck(person,people){
      for (var i = 0; i <= 21; i++) {
         if (person.currentSpouse === people[i].id){
           var spouseName= (people[i].firstName + " " + people[i].lastName)
-          alert(spouseName)
-        }
-      }
+        }else{var spouseName = "N/A"
+      }return spouseName
     }
+  }
 
 function parentCheck(person,people){
   var parentNames=[]
@@ -153,9 +159,10 @@ function parentCheck(person,people){
     for (var i = 0; i <= 21; i++) {
       if (people[i].id === parentId[0] || people[i].id === parentId[1]) {
         parentNames.push(people[i].firstName + " " + people[i].lastName)
-      }
-    }
-  }alert(parentNames)
+      } 
+    } 
+  }var parentString = parentNames.join()
+  return parentString
 }
 
 function childCheck(person,people){
@@ -164,17 +171,24 @@ function childCheck(person,people){
     if (person.id == people[i].parents[0] || person.id == people[i].parents[1]){
       childNames.push(people[i].firstName + " " + people[i].lastName)
     }
-  }alert(childNames)
+  }var childString=childNames.join()
+  return childString
 } 
 
 function siblingCheck(person,people){
   var siblingNames=[]
     for (var i = 0 ; i <= 21; i++) {
-      if (person.parents[0] == people[i].parents[0]){
+      if (person.parents[0]>0 && person.parents[0] == people[i].parents[0]){
         siblingNames.push(people[i].firstName + " " + people[i].lastName)
       }
-    }alert(siblingNames)
+    } return siblingNames
   }
+
+function descendantCheck(person,people){
+  for (var i = 0; i <= 21; i++) {
+   if (person.id == people[i].parents[0] || person.id == people[i].parents[1]){
+    
+     
 
 
 
