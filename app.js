@@ -12,9 +12,12 @@ function app(people){
 
     break;
     case 'no':
-      var ids=searchTrait(people)
-      alert(ids)
-   
+      var filteredPeople = filterSelection(people)
+      var filteredNames = filteredPeople.map(function(person){
+        return (person.firstName + " " + person.lastName)
+      })
+      alert(filteredNames)
+       
     break;
     default:
     app(people); // restart app
@@ -117,13 +120,58 @@ function chars(input){
   return true; // default validation only
 }
 
-//function searchTrait (people) {
-    //var traitType=promptFor ("What are the traits you would like to search for? Age, Height, Weight, Eye Color or Occupation?").toLowerCase;
-     // people.filter(function (traitType)) {
-         // if (traitType==) {
+function filterSelection(people){
+  var selection = prompt("Height,Weight,Occupation,EyeColor,Age")
+  var filters = selection.split(" ")
+    for (var i = 0; i <= filters.length-1; i++) {
+      if (filters[i] == "Height") {
+        var heightSelect = prompt("Height in inches?")
+        var people = people.filter(function heightFilter(person){
+          return person.height == heightSelect
+          });
+      }else if (filters[i] == "Weight") {
+        var weightSelect = prompt("Weight in pounds?")
+        var people = people.filter(function weightFilter(person){
+          return person.weight == weightSelect
+        })
+      }else if (filters[i] == "Occupation"){
+        var occupationSelect = prompt("Occupation?")
+        var people = people.filter(function occupationFilter(person){
+          return person.occupation == occupationSelect
+        })
+      }else if (filters[i] == "EyeColor") {
+        var eyeColorSelect = prompt("Eye color?")
+        var people = people.filter(function eyeColorFilter(person){
+          return person.eyeColor == eyeColorSelect
+        })
+      }else if (filters[i] = "Age"){
+        for (var i = 0; i <= people.length-1; i++) {
+          var dateOfBirth = people[i].dob
+          people[i].dob = getAge(dateOfBirth)
+          }
+        var ageSelect = prompt("How old?")
+        var people = people.filter(function ageFilter(person){
+          return person.dob == ageSelect
+        })
+    }return people
+  }
+}
 
 
-          //}
+function getAge(dateOfBirth) 
+{
+    var today = new Date();
+    var birthDate = new Date(dateOfBirth);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;
+}
+
+
 
 
       
