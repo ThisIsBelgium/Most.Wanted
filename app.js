@@ -49,7 +49,17 @@ function mainMenu(person, people){
       alert("Spouse name:" + "\n" + spouseName + "\n" + "Parents:" + "\n" + parentString + "\n" + "Children:" + "\n" + childString + "\n" + "Siblings:" + "\n" + siblingNames)
     break;
     case "descendants":
-    // TODO: get person's descendants
+      var descendants = []
+      var descendantsNames=[]
+      descendantCheck(person,people,descendants)
+      for (var i = 0; i <= descendants.length-1 ; i++) {
+        descendantCheck(descendants[i],people,descendants)
+      }
+      for (var i = 0; i <= descendants.length-1; i++) {
+        descendantsNames.push(descendants[i].firstName + " " + descendants[i].lastName)
+      }
+      alert(descendantsNames)
+
     break;
     case "restart":
     app(people); // restart
@@ -64,7 +74,7 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-    for (var i=0; i<=people.length; i++){
+    for (var i=0; i<=people.length-1; i++){
         if (people[i].firstName === firstName && people[i].lastName === lastName){
           return(people[i])
         }
@@ -107,32 +117,33 @@ function chars(input){
   return true; // default validation only
 }
 
-function searchTrait (people) {
-    var traitType=promptFor ("What are the traits you would like to search for? Age, Height, Weight, Eye Color or Occupation?").toLowerCase;
-      people.filter(function (traitType)) {
-          if (traitType==) {
+//function searchTrait (people) {
+    //var traitType=promptFor ("What are the traits you would like to search for? Age, Height, Weight, Eye Color or Occupation?").toLowerCase;
+     // people.filter(function (traitType)) {
+         // if (traitType==) {
 
 
-          }
+          //}
 
 
       
 function spouseCheck(person,people){
-     for (var i = 0; i <= people.length; i++) {
-        if (person.currentSpouse === people[i].id){
+     for (var i = 0; i <= people.length-1; i++) {
+        if (person.currentSpouse == people[i].id){
           var spouseName= (people[i].firstName + " " + people[i].lastName)
-        }else{var spouseName = "N/A"
-      }return spouseName
-    }
+      }
+    }if (spouseName === 0) {
+      return "N/A"
+    }else{return spouseName}
   }
 
 function parentCheck(person,people){
   var parentNames=[]
   var parentId=[]
-  for (var i = 0; i <= people.length; i++) {
+  for (var i = 0; i <= 1; i++) {
     parentId.push(person.parents[i])
   }if (parentId[0]>0) {
-    for (var i = 0; i <= people.length; i++) {
+    for (var i = 0; i <= people.length-1; i++) {
       if (people[i].id === parentId[0] || people[i].id === parentId[1]) {
         parentNames.push(people[i].firstName + " " + people[i].lastName)
       } 
@@ -143,7 +154,7 @@ function parentCheck(person,people){
 
 function childCheck(person,people){
   var childNames=[]
-  for (var i = 0; i <= people.length; i++) {
+  for (var i = 0; i <= people.length-1; i++) {
     if (person.id == people[i].parents[0] || person.id == people[i].parents[1]){
       childNames.push(people[i].firstName + " " + people[i].lastName)
     }
@@ -153,18 +164,35 @@ function childCheck(person,people){
 
 function siblingCheck(person,people){
   var siblingNames=[]
-    for (var i = 0 ; i <= people.length; i++) {
+    for (var i = 0 ; i <= people.length-1; i++) {
       if (person.parents[0] == people[i].parents[0]){
-    for (var i = 0 ; i <= 21; i++) {
+    for (var i = 0 ; i <= people.length-1; i++) {
       if (person.parents[0]>0 && person.parents[0] == people[i].parents[0]){
         siblingNames.push(people[i].firstName + " " + people[i].lastName)
-      }
-    } return siblingNames
+        }
+      } return siblingNames
+    }
   }
+}
 
-function descendantCheck(person,people){
-  for (var i = 0; i <= 21; i++) {
-   if (person.id == people[i].parents[0] || person.id == people[i].parents[1]){
+
+function descendantCheck(person,people,descendants){
+  for (var i = 0 ; i <= people.length-1 ; i++) {
+    if (person.id == people[i].parents[0] || person.id == people[i].parents[1]) {
+      descendants.push(people[i])
+    }
+  }
+}
+
+
+  
+      
+        
+          
+       
+      
+
+
     
      
 
