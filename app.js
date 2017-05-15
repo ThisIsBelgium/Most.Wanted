@@ -7,9 +7,10 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      var person=searchByName(people)
+      var searchedPersons=searchByName(people)
+      var person = personSelector(searchedPersons)
       mainMenu(person,people)
-
+     
     break;
     case 'no':
       var filteredPeople = filterSelection(people)
@@ -75,14 +76,15 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
+  var searchedPersons = []
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
     for (var i=0; i<=people.length-1; i++){
         if (people[i].firstName === firstName && people[i].lastName === lastName){
-          return(people[i])
+          searchedPersons.push(people[i])
         }
       
-    }
+    }return searchedPersons
 
 }
 
@@ -232,7 +234,17 @@ function descendantCheck(person,people,descendants){
   }
 }
 
-
+function personSelector(searchedPersons){
+  for (var i = 0; i <= searchedPersons.length ; i++) {
+        if (searchedPersons.length>=0) {
+          var selectPerson =  searchedPersons[i]
+          var selection = prompt(selectPerson.firstName + " " + selectPerson.lastName + ":" + selectPerson.dob + "\n "+ "Is the person above the name you are looking for?")
+            if (selection = "yes") {
+              return selectPerson
+            }
+        }
+    }
+  }
   
       
         
