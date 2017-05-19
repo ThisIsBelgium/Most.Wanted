@@ -17,12 +17,12 @@ function app(people){
       var filteredNames = filteredPeople.map(function(person){
         return (person.firstName + " " + person.lastName)
       })
-      alert(filteredNames)
-       
+    	alert(filteredNames)
+		app(people)	 
+    break;
     break;
     default:
-    app(people); // restart app
-    break;
+    app(people); // restart 
   }
 }
 
@@ -123,41 +123,40 @@ function chars(input){
 }
 
 function filterSelection(people){
-  var selection = prompt("Height,Weight,Occupation,EyeColor,Age")
-  var filters = selection.split(" ")
+  var selection = prompt("Height,Weight,Occupation,Eye Color" + "\n" + "(Seperated by commas)")
+  var selection = selection.toLowerCase()
+  var filters = selection.split(",")
     for (var i = 0; i <= filters.length-1; i++) {
-      if (filters[i] == "Height") {
+      if (filters[i] == "height") {
         var heightSelect = prompt("Height in inches?")
         var people = people.filter(function heightFilter(person){
           return person.height == heightSelect
           });
-      }else if (filters[i] == "Weight") {
+      }else if (filters[i] == "weight") {
         var weightSelect = prompt("Weight in pounds?")
         var people = people.filter(function weightFilter(person){
           return person.weight == weightSelect
         })
-      }else if (filters[i] == "Occupation"){
+      }else if (filters[i] == "occupation"){
         var occupationSelect = prompt("Occupation?")
         var people = people.filter(function occupationFilter(person){
           return person.occupation == occupationSelect
         })
-      }else if (filters[i] == "EyeColor") {
+      }else if (filters[i] == "eye color") {
         var eyeColorSelect = prompt("Eye color?")
         var people = people.filter(function eyeColorFilter(person){
           return person.eyeColor == eyeColorSelect
         })
-      }else if (filters[i] = "Age"){
-        for (var i = 0; i <= people.length-1; i++) {
-          var dateOfBirth = people[i].dob
-          people[i].dob = getAge(dateOfBirth)
-          }
-        var ageSelect = prompt("How old?")
-        var people = people.filter(function ageFilter(person){
-          return person.dob == ageSelect
-        })
+      //else if (filters[i] = "Age"){
+      	//var ageSelect = prompt("How old?")
+        //for (var a = 0; a <= people.length-1; a++) {
+        	//people[a].dob = getAge(people[a].dob)
+        	//var people = people.filter(function ageFilter(person){
+        	//return person.dob == ageSelect
+        		
+    	}
     }return people
   }
-}
 
 
 function getAge(dateOfBirth) 
@@ -199,6 +198,9 @@ function parentCheck(person,people){
       } 
     } 
   }var parentString = parentNames.join()
+  if (parentString === "") {
+    return "N/A"
+  }
   return parentString
 }
 
@@ -209,6 +211,9 @@ function childCheck(person,people){
       childNames.push(people[i].firstName + " " + people[i].lastName)
     }
   }var childString=childNames.join()
+  if (childString === "") {
+    return "N/A"
+  }
   return childString
 } 
 
@@ -238,7 +243,7 @@ function personSelector(searchedPersons){
   for (var i = 0; i <= searchedPersons.length ; i++) {
         if (searchedPersons.length>=0) {
           var selectPerson =  searchedPersons[i]
-          var selection = prompt(selectPerson.firstName + " " + selectPerson.lastName + ":" + selectPerson.dob + "\n "+ "Is the person above the name you are looking for?")
+          var selection = prompt(selectPerson.firstName + " " + selectPerson.lastName + ":" + selectPerson.dob + "\n "+ "Is the person above the name you are looking for?(Y/N)")
             if (selection = "yes") {
               return selectPerson
             }
